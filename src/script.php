@@ -8,6 +8,16 @@ $dotenv->load();
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\FileCookieJar;
 
+
+if ($_ENV['MODE'] == 'dev'){
+    $filePath = 'development.json';
+    $data = file_get_contents($filePath);
+    sleep(2);
+    header('Content-Type: application/json; charset=utf-8');
+    echo $data;
+    exit();
+}
+
 $cookieJar = new FileCookieJar("/var/www/html/honeynet/src/cookie.txt", true);
 
 $client = new Client(['cookies' => $cookieJar]);

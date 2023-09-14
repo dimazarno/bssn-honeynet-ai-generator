@@ -12,10 +12,12 @@ $dotenv->load();
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://portal-honeynet.bssn.go.id/honeynetadmin/resources/mar/jvectormaps/jquery-jvectormap-2.0.3.min.js"></script>
-    <link   href="https://portal-honeynet.bssn.go.id/honeynetadmin/resources/mar/jvectormaps/jquery-jvectormap-2.0.3.css"   rel="stylesheet">
-    <script src="https://portal-honeynet.bssn.go.id/honeynetadmin/resources/mar/jvectormaps/jquery-jvectormap-asia-mill.js"></script>
-    <script src="https://portal-honeynet.bssn.go.id/honeynetadmin/resources/mar/jvectormaps/jquery-jvectormap-world-mill.js"></script>
+    
+    <script src="./assets/jquery-jvectormap-2.0.3.min.js"></script>
+    <link   href="./assets/jquery-jvectormap-2.0.3.css" rel="stylesheet">
+    <script src="./assets/jquery-jvectormap-asia-mill.js"></script>
+    <script src="./assets/jquery-jvectormap-world-mill.js"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-adapter-moment/1.0.0/chartjs-adapter-moment.min.js"></script>
     <link href="./template.css" rel="stylesheet">
