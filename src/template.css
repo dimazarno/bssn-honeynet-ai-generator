@@ -1,0 +1,73 @@
+/* Aturan umum */
+.hn-wrap {
+  /* Isi sesuai kebutuhan */
+}
+
+.hn-title {
+  font-size: 15px;
+  font-weight: bold;
+  background-color: #5c98c8;
+  color: white;
+  padding: 7px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border: #f3f3f3 solid 2px;
+  border-bottom: none;
+}
+
+.hn-content {
+  padding: 7px;
+  background-color: #f2f7fb;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: #f3f3f3 solid 2px;
+  border-top: none;
+}
+
+.hn-content-only {
+  padding: 7px;
+  background-color: #f2f7fb;
+  border-radius: 10px;
+  border: #f3f3f3 solid 2px;
+}
+
+/* Aturan untuk mode print */
+@media print {
+
+  body * {
+    visibility: hidden;
+  }
+
+  #report_area, #report_area * {
+    visibility: visible !important;
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
+  #report_area {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .hn-title, .hn-content, .hn-content-only {
+    visibility: visible !important;
+  }
+  /* Tambahkan aturan lain jika diperlukan */
+}
+
+.sortable-icon {
+    cursor: move;
+}
+h1{
+    font-size:15px;
+}
+h3{
+    font-size:14px;
+}
+h4{
+    font-size:13px;
+}
+ul { margin-left: 20px}
+
+

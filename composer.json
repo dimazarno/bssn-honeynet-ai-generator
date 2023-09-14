@@ -1,0 +1,17 @@
+{
+    "name": "honeynet/report",
+    "autoload": {
+        "psr-4": {
+            "Honeynet\\Report\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dimaz Arno"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.8",
+        "vlucas/phpdotenv": "^5.5"
+    }
+}
