@@ -12,7 +12,7 @@ use GuzzleHttp\Cookie\FileCookieJar;
 if ($_ENV['MODE'] == 'dev'){
     $filePath = 'development.json';
     $data = file_get_contents($filePath);
-    sleep(2);
+    sleep(0);
     header('Content-Type: application/json; charset=utf-8');
     echo $data;
     exit();
@@ -48,7 +48,7 @@ $bars = $json_req_top_chart_ip['label'];
 
 $table_ip = "
 <div class='hn-wrap'>
-        <div class='hn-title'>TOP ATTACKER IP</div>
+        <div class='hn-title'>TOP IP</div>
         <div class='hn-content' style='height:291px'>
             <table class='table'>
                 <thead>
@@ -93,7 +93,7 @@ $data = $req_top_country_json['data'];
 
 $table_top_country = "
 <div class='hn-wrap'>
-        <div class='hn-title'>TOP COUNTRY ATTACKER</div>
+        <div class='hn-title'>TOP COUNTRY</div>
         <div class='hn-content' style='height:291px'>
             <table class='table'>
                 <thead>
@@ -243,7 +243,7 @@ $value = $req_top_malware_json['value'];
 $table_malware = "
 <div class='hn-wrap'>
     <div class='hn-title'>TOP MALWARE</div>
-        <div class='hn-content'>
+        <div class='hn-content' style='height:291px'>
         <table class='table'>
             <thead>
                 <tr>
@@ -282,7 +282,7 @@ $top_port_one = $names[0];
 
 $table_port = "
 <div class='hn-wrap'>
-    <div class='hn-title'>TOP PORT</div>
+    <div class='hn-title' style='height:291px'>TOP PORT</div>
         <div class='hn-content'>
         <table class='table'>
     <thead>

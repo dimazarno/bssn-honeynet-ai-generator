@@ -9,6 +9,7 @@ $dotenv->load();
     <meta charset="UTF-8">
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -20,13 +21,16 @@ $dotenv->load();
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-adapter-moment/1.0.0/chartjs-adapter-moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
     <link href="./template.css" rel="stylesheet">
 </head>
 <body>
     <div class="container" style="margin-top:20px">
         <h1 style="font-size: 20px;">Dashboard</h1>
         <div class="row" style="margin-top:20px;">
-            <div class="col-md-3" style="margin-bottom:20px;padding:10px;border:1px solid black;background-color: #f7f4e4;"> <!-- Kolom kiri (25%) -->
+            <div class="col-md-3" id="menu" style="margin-bottom:20px;padding:10px;border:1px solid black;background-color: #f7f4e4;"> <!-- Kolom kiri (25%) -->
                 <p style="font-size:18px;font-weight: bold;">Filter Periode Pencarian</p>
                 <form id="dateForm">
                     <div class="mb-3">
@@ -49,14 +53,42 @@ $dotenv->load();
                     <button type="submit" id="btnAI" class="btn btn-primary">Generate</button>
                 </form>
 
+                <p style="margin-top:30px;font-size:18px;font-weight: bold;">Contents</p>
+                <label><input type="checkbox" class="toggleDisplay" data-target="parent_resume_data" checked> Informasi Umum</label><br>
+                <label><input type="checkbox" class="toggleDisplay" data-target="parent_top_id" checked> Top IP</label><br>
+                <label><input type="checkbox" class="toggleDisplay" data-target="parent_top_country" checked> Top Country</label><br>
+                <label><input type="checkbox" class="toggleDisplay" data-target="daily_attack_chart_parent" checked> Stats Serangan Harian</label><br>
+                <label><input type="checkbox" class="toggleDisplay" data-target="malware_parent" checked> Stats Malware</label><br>
+                <label><input type="checkbox" class="toggleDisplay" data-target="parent_top_malware" checked> Top Malware & Port</label><br>
+                <label><input type="checkbox" class="toggleDisplay" data-target="summary" checked> Summary</label><br>
+
                 <p style="margin-top:30px;font-size:18px;font-weight: bold;">Tools</p>
-                <button class="btn btn-primary" id="toggleButton">Aktifkan Sortable</button>
-                <button id="printButton" class="btn btn-primary">Print Preview</button>
+                <!-- Print Preview -->
+                <button id="printButton" class="btn btn-info">
+                  <i class="bi bi-printer"></i> Print Preview
+                </button>
+                <!-- Aktifkan Sortable -->
+                <button class="btn btn-success" id="toggleButton">
+                  <i class="bi bi-chevron-bar-contract"></i> Aktifkan Pengurutan
+                </button>
+
+                <!-- Tambah Section Baru -->
+                <button id="addSectionButton" class="btn btn-warning">
+                  <i class="bi bi-plus-circle"></i> Tambah Section Baru
+                </button>
+
+                <!-- Membuat button duplikat page break -->
+                <button id="duplicatePageBreakButton" class="btn btn-danger">
+                  <i class="bi bi-file-earmark-plus"></i> Duplikat Page Break
+                </button>
+
+
+
             </div>
 
             <div class="col-md-9" style="padding-left: 20px;"> <!-- Kolom kanan (75%) -->
                 <div id="report_area" style="margin-bottom:20px" contenteditable="true">
-                    <div id="kop" style="padding-bottom:10px;border-bottom: 4px solid black;">
+                    <div id="kop">
                         <center>
                             <table border=0>
                                 <tr>
@@ -70,7 +102,7 @@ $dotenv->load();
                         </center>
                     </div>
 
-                    <div id="parent_resume_data" class="row col-md-12" style="margin-top: 20px;">
+                    <div id="parent_resume_data" class="row col-md-12 space">
                         <div id="resume_data" class="col-md-5" style="max-width: 38%;">
                           
                         </div>
@@ -86,7 +118,11 @@ $dotenv->load();
                         </div>
                     </div>
 
-                    <div id="parent_top_id" class="row col-md-12" style="margin-top: 20px;">
+                    <div id="daily_attack_chart_parent" class="row col-md-12 space">
+                        <div id="daily_attack_info" class="row col-md-12"></div>
+                    </div>
+
+                    <div id="parent_top_id" class="row col-md-12 space">
                         <div id="top_ip" class="col-md-5" style="max-width: 38%;">
                           
                         </div>
@@ -101,7 +137,9 @@ $dotenv->load();
                         </div>
                     </div>
 
-                    <div id="parent_top_country" class="row col-md-12" style="margin-top: 20px;">
+                    <div class="pagebreak"></div>
+
+                    <div id="parent_top_country" class="row col-md-12 space">
                         <div id="top_country" class="col-md-5" style="max-width: 38%;">
                           
                         </div>
@@ -114,16 +152,12 @@ $dotenv->load();
                         </div>
                         <div id="map_top_country"></div>
                     </div>
-                    
-                    <div id="daily_attack_chart_parent" class="row col-md-12" style="margin-top: 20px;">
-                        <div id="daily_attack_info" class="row col-md-12"></div>
-                    </div>
 
-                    <div id="malware_parent" class="row col-md-12" style="margin-top: 20px;">
+                    <div id="malware_parent" class="row col-md-12 space">
                         <div id="malware_dropping_info" class="row col-md-12"></div>
                     </div>
 
-                    <div id="parent_top_malware" class="row col-md-12" style="margin-top: 20px;">
+                    <div id="parent_top_malware" class="row col-md-12 space">
                         <div id="top_malware" class="col-md-6" style="max-width: 50%;">
                           
                         </div>
@@ -132,7 +166,7 @@ $dotenv->load();
                         </div>
                     </div>
 
-                    <div id="summary" class="row col-md-12" style="margin-top: 20px;" contenteditable="true">
+                    <div id="summary" class="row col-md-12 space">
                         
                     </div>
                 </div>
@@ -146,6 +180,30 @@ $dotenv->load();
             </div>
         </center>
     </div>
+
+    <div class="modal fade" id="sectionModal" tabindex="-1" role="dialog" aria-labelledby="sectionModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="sectionModalLabel">Tambah Section Baru</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="addSectionForm">
+                        <div class="form-group">
+                            <label for="sectionTitleInput">Judul</label>
+                            <input type="text" class="form-control" id="sectionTitleInput" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="sectionBodyInput">Isi Konten</label>
+                            <textarea class="form-control" id="sectionBodyInput" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Tambahkan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script>
         var myChart; 
@@ -188,19 +246,65 @@ $dotenv->load();
               if (isSortableActive) {
                 // Menonaktifkan sortable
                 $("#report_area").sortable("disable");
-                $(this).text("Aktifkan Sortable");
+                $("#report_area").css('background-color', '');  // Mengembalikan ke warna background asli
+                $(this).html('<i class="bi bi-chevron-bar-contract"></i> Aktifkan Pengurutan');
               } else {
                 // Mengaktifkan sortable
                 $("#report_area").sortable("enable");
-                $(this).text("Nonaktifkan Sortable");
+                $("#report_area").css('background-color', '#F0FFF0');  // Warna hijau sangat muda
+                $(this).html('<i class="bi bi-chevron-bar-contract"></i> Non-aktifkan Pengurutan');
               }
               
               isSortableActive = !isSortableActive;
             });
 
+
             // Inisialisasi sortable tapi nonaktifkan dulu
             $("#report_area").sortable();
             $("#report_area").sortable("disable");
+
+
+            $('.toggleDisplay').change(function() {
+              const targetId = $(this).data('target');
+              if ($(this).is(":checked")) {
+                $('#' + targetId).show();
+              } else {
+                $('#' + targetId).hide();
+              }
+            });
+
+            $('#addSectionButton').click(function() {
+                $('#sectionModal').modal('show');
+            });
+
+            $('#addSectionForm').submit(function(event) {
+                event.preventDefault();
+                var sectionTitle = $('#sectionTitleInput').val();
+                var sectionBody = $('#sectionBodyInput').val();
+
+                var newSection = $('<div class="new_section row col-md-12 space">' +
+                                    '<div class="hn-wrap">' +
+                                    '<div class="hn-title"></div>' +
+                                    '<div class="hn-content"></div>' +
+                                    '</div>' +
+                                    '</div>');
+
+                newSection.find('.hn-title').text(sectionTitle);
+                newSection.find('.hn-content').text(sectionBody);
+
+                $('#report_area').append(newSection);
+
+                $('#sectionModal').modal('hide');
+
+                $('#sectionTitleInput').val('');
+                $('#sectionBodyInput').val('');
+            });
+
+            // Fungsi untuk menduplikasi page break
+            $('#duplicatePageBreakButton').click(function() {
+                var pageBreak = $('.pagebreak').first().clone();
+                $('#report_area').append(pageBreak);
+            });
 
         });
      

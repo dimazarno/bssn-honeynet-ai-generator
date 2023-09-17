@@ -1,6 +1,45 @@
 /* Aturan umum */
+
+.sortable-icon {
+    cursor: move;
+}
+h1{
+    font-size:15px;
+}
+h3{
+    font-size:14px;
+}
+h4{
+    font-size:13px;
+}
+ul { margin-left: 20px}
+
+.btn{
+  margin:5px;
+}
+
+.space {
+  margin-top: 20px;
+}
+
+.pagebreak{
+  break-after: always;
+  page-break-after: always;
+  border:1px solid black;
+  height: 5px;
+  margin-top: 20px;
+}
+
+#kop {
+  padding-bottom:10px;border-bottom: 4px solid black;
+}
+
+.new-section{
+  margin-right: 20px;
+}
+
 .hn-wrap {
-  /* Isi sesuai kebutuhan */
+  
 }
 
 .hn-title {
@@ -53,21 +92,13 @@
   .hn-title, .hn-content, .hn-content-only {
     visibility: visible !important;
   }
+
+  .pagebreak{
+    border:1px solid white;
+    height: 1px;
+    margin-top: 0px;
+  }
+
   /* Tambahkan aturan lain jika diperlukan */
 }
-
-.sortable-icon {
-    cursor: move;
-}
-h1{
-    font-size:15px;
-}
-h3{
-    font-size:14px;
-}
-h4{
-    font-size:13px;
-}
-ul { margin-left: 20px}
-
 
