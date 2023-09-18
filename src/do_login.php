@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if ($logged_in) {
             //echo "Login success";
-            $cookieJar->save('/var/www/html/honeynet/src/cookie.txt');
+            $cookieJar->save($_ENV['COOKIE_FILE']);
             echo "Success";
             //header("location: dashboard.php");
             exit();
