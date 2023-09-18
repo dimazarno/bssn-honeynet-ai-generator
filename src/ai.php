@@ -47,7 +47,7 @@ $response = $client->post('https://api.openai.com/v1/chat/completions', [
         'Content-Type' => 'application/json',
     ],
     'json' => [
-        'model' => 'gpt-4',
+        'model' => 'gpt-4', //Untuk yang free ganti ke gpt-3.5-turbo-16k
         'messages' => [
             [
                 'role' => 'user',

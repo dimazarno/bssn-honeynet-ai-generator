@@ -18,7 +18,7 @@ if ($_ENV['MODE'] == 'dev'){
     exit();
 }
 
-$cookieJar = new FileCookieJar("/var/www/html/honeynet/src/cookie.txt", true);
+$cookieJar = new FileCookieJar($_ENV['COOKIE_FILE'], true);
 
 $client = new Client(['cookies' => $cookieJar]);
 
@@ -282,8 +282,8 @@ $top_port_one = $names[0];
 
 $table_port = "
 <div class='hn-wrap'>
-    <div class='hn-title' style='height:291px'>TOP PORT</div>
-        <div class='hn-content'>
+    <div class='hn-title'>TOP PORT</div>
+        <div class='hn-content' style='height:291px'>
         <table class='table'>
     <thead>
         <tr>
@@ -307,7 +307,6 @@ $table_port .= "</tbody>
         </table>
         </div>
     </div>";
-
 
 
 #info

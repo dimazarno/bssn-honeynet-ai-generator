@@ -1,12 +1,18 @@
 <?php
 ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 require '../vendor/autoload.php';
-
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\FileCookieJar;
 
 $client = new Client();
-$cookieJar = new FileCookieJar("/var/www/html/honeynet/src/cookie.txt", true);
+$cookieJar = new FileCookieJar($_ENV['COOKIE_FILE'], true);
+
+if ($_ENV['MODE'] == 'dev'){
+    echo "Success";
+    die();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['user_email'];
